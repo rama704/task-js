@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Exercises</title>
+</head>
+<body>
+    <h1>JavaScript Exercises</h1>
+    <script>
+        // 1) Birth month using prompt and switch
+        let monthNumber = prompt("Enter your birth month number (1-12):");
+        monthNumber = Number(monthNumber);
+        let monthName;
+        switch(monthNumber) {
+            case 1: monthName = "January"; break;
+            case 2: monthName = "February"; break;
+            case 3: monthName = "March"; break;
+            case 4: monthName = "April"; break;
+            case 5: monthName = "May"; break;
+            case 6: monthName = "June"; break;
+            case 7: monthName = "July"; break;
+            case 8: monthName = "August"; break;
+            case 9: monthName = "September"; break;
+            case 10: monthName = "October"; break;
+            case 11: monthName = "November"; break;
+            case 12: monthName = "December"; break;
+            default: monthName = "Invalid month number";
+        }
+        console.log("Your month is:", monthName);
+
+        // 2) Loop pattern
+        console.log("Pattern:");
+        let num = 1;
+        for(let i = 1; i <= 4; i++){
+            let row = "";
+            for(let j = 1; j <= i; j++){
+                row += num + " ";
+                num++;
+            }
+            console.log(row.trim());
+        }
+
+        // 3) Numbers 1-1000 divisible by 13
+        console.log("Numbers divisible by 13:");
+        for(let i = 1; i <= 1000; i++){
+            if(i % 13 === 0) console.log(i);
+        }
+
+        // 4) multiplication2 function using only sum
+        function multiplication2(a, b){
+            let result = 0;
+            for(let i = 0; i < b; i++){
+                result += a;
+            }
+            return result;
+        }
+        console.log("multiplication2(5,4) =", multiplication2(5,4));
+        console.log("multiplication2(2,8) =", multiplication2(2,8));
+        console.log("multiplication2(7,6) =", multiplication2(7,6));
+
+        // 4b) fullName function
+        function fullName(firstName, lastName){
+            return firstName + " " + lastName;
+        }
+        console.log(fullName("Adam","McCallen")); // Adam McCallen
+        console.log(fullName("Alex","Mercer"));   // Alex Mercer
+
+        // 5) Triangle area function
+        function triangleArea(base, height){
+            return (base * height) / 2;
+        }
+        console.log("Area of triangle (5,10):", triangleArea(5,10));
+
+        // 6) Pandigital function
+        function isPandigital(n){
+            let str = n.toString();
+            for(let digit = 0; digit <= 9; digit++){
+                if(!str.includes(digit.toString())) return false;
+            }
+            return true;
+        }
+        console.log("isPandigital(98140723568910):", isPandigital(98140723568910));
+        console.log("isPandigital(90864523148909):", isPandigital(90864523148909));
+
+        // 7) Favorite drink price using switch
+        let drink = prompt("Enter your favorite drink (Banana, Apple, Orange, Mango):");
+        let price;
+        switch(drink.toLowerCase()){
+            case "banana": price = 20; break;
+            case "apple": price = 15; break;
+            case "orange": price = 18; break;
+            case "mango": price = 25; break;
+            default: price = null;
+        }
+        if(price !== null){
+            console.log(`The price of a ${drink} drink is ${price} dollars`);
+        } else {
+            console.log("Drink not found");
+        }
+         // تعريف الدالة
+        function fullName(firstName, lastName) {
+            return firstName + " " + lastName;
+        }
+
+        // أمثلة للاستخدام
+        console.log(fullName("Adam", "McCallen")); // Output: "Adam McCallen"
+        console.log(fullName("Alex", "Mercer"));   // Output: "Alex Mercer"
+
+        // مثال مع prompt من المستخدم
+        let first = prompt("Enter your first name:");
+        let last = prompt("Enter your last name:");
+        let result = fullName(first, last);
+        console.log("Your full name is:", result);
+        alert("Your full name is: " + result);
+    </script>
+</body>
+</html>
