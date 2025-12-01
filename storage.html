@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Storage Tasks - Local & Session Storage</title>
+    <style>
+        /* CSS Styling for Cards and Layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h2 {
+            border-bottom: 2px solid #5cb85c;
+            padding-bottom: 5px;
+            color: #5cb85c;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"], input[type="email"], input[type="password"], textarea {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
+            background: #e9f5e9;
+            border-left: 5px solid #5cb85c;
+            padding: 15px;
+            border-radius: 5px;
+            width: 300px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .card h4 {
+            margin-top: 0;
+            color: #333;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #ffe6e6;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Browser Storage Tasks (Local & Session Storage)</h1>
+
+    <section>
+        <h2> Task One: Personal Data (Local Storage)</h2>
+        <form id="personalDataForm">
+            <label for="name">Your Name[cite: 3]:</label>
+            <input type="text" id="name" required>
+
+            <label for="age">Your Age[cite: 4]:</label>
+            <input type="number" id="age" required>
+
+            <label>Gender[cite: 5]:</label>
+            <div>
+                <input type="radio" id="female" name="gender" value="Female" required>
+                <label for="female" style="display: inline;">Female</label>
+                <input type="radio" id="male" name="gender" value="Male" required>
+                <label for="male" style="display: inline;">Male</label>
+            </div>
+
+            <label for="description">Brief Description[cite: 6]:</label>
+            <textarea id="description" rows="3" required></textarea>
+
+            <label for="majorUni">Your major and university[cite: 7]:</label>
+            <input type="text" id="majorUni" required>
+
+            <label>Programming Language you prefer (min 3)[cite: 8]:</label>
+            <div>
+                <input type="checkbox" name="lang" value="JavaScript"> <label style="display: inline;">JavaScript</label><br>
+                <input type="checkbox" name="lang" value="Python"> <label style="display: inline;">Python</label><br>
+                <input type="checkbox" name="lang" value="Java"> <label style="display: inline;">Java</label><br>
+                <input type="checkbox" name="lang" value="C#"> <label style="display: inline;">C#</label><br>
+                <input type="checkbox" name="lang" value="PHP"> <label style="display: inline;">PHP</label>
+            </div>
+            <br>
+            <button type="submit">Store & Render (Local Storage) [cite: 9, 10, 11]</button>
+        </form>
+
+        <h3>Stored Personal Data Cards:</h3>
+        <div id="localDataContainer" class="cards-container">
+            </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2> Task Two: Project Idea (Session Storage)</h2>
+        <form id="projectIdeaForm">
+            <label for="subject">Subject[cite: 13]:</label>
+            <input type="text" id="subject" required>
+
+            <label for="projectDesc">Description[cite: 14]:</label>
+            <textarea id="projectDesc" rows="3" required></textarea>
+
+            <label for="userTypes">User Types[cite: 15]:</label>
+            <input type="text" id="userTypes" required>
+
+            <label for="technology">Technology used[cite: 16]:</label>
+            <input type="text" id="technology" required>
+
+            <button type="submit">Store & Render (Session Storage) [cite: 17, 18]</button>
+        </form>
+
+        <h3>Stored Project Idea Cards (Current Session Only):</h3>
+        <div id="sessionDataContainer" class="cards-container">
+            </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Task Three: Registration / Login (Local Storage)</h2>
+
+        <h3>Registration Form[cite: 20]:</h3>
+        <form id="registerForm">
+            <label for="regFirstName">First Name:</label>
+            <input type="text" id="regFirstName" required>
+
+            <label for="regLastName">Last Name:</label>
+            <input type="text" id="regLastName" required>
+
+            <label for="regEmail">Email:</label>
+            <input type="email" id="regEmail" required>
+
+            <label for="regPassword">Password:</label>
+            <input type="password" id="regPassword" required>
+
+            <button type="submit">Register and Store</button>
+            <p id="registerMessage" style="color: green; font-weight: bold;"></p>
+        </form>
+
+        <h3>Login Form[cite: 20]:</h3>
+        <form id="loginForm">
+            <label for="loginEmail">Email:</label>
+            <input type="email" id="loginEmail" required>
+
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" required>
+
+            <button type="submit">Login</button>
+            <p id="loginMessage" style="font-weight: bold;"></p>
+        </form>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Helper function to render data as a card
+            function renderCard(data, containerId, storageType) {
+                const container = document.getElementById(containerId);
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                // Determine card title
+                const title = data.name || data.subject || `${data.firstName} ${data.lastName}` || 'User Data';
+                
+                let content = `<h4>${title} (${storageType})</h4>`;
+
+                for (const key in data) {
+                    // Skip rendering the password for security
+                    if (key !== 'password') {
+                         // Format the key to be more readable
+                        const displayKey = key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1').trim();
+                        content += `<p><strong>${displayKey}:</strong> ${data[key]}</p>`;
+                    }
+                }
+                
+                card.innerHTML = content;
+                container.appendChild(card);
+            }
+
+            // Function to load all stored data on page load
+            function loadStoredData() {
+                // Task 1: Local Storage (Personal Data)
+                const localData = JSON.parse(localStorage.getItem('personalRecords') || '[]');
+                const localContainer = document.getElementById('localDataContainer');
+                localContainer.innerHTML = ''; // Clear container
+                localData.forEach(data => renderCard(data, 'localDataContainer', 'Local'));
+
+                // Task 2: Session Storage (Project Idea)
+                const sessionData = JSON.parse(sessionStorage.getItem('projectIdeas') || '[]');
+                const sessionContainer = document.getElementById('sessionDataContainer');
+                sessionContainer.innerHTML = ''; // Clear container
+                sessionData.forEach(data => renderCard(data, 'sessionDataContainer', 'Session'));
+            }
+
+            // Load data when the page loads
+            loadStoredData();
+
+            /* ---------------------------------------------------- */
+            /* Task One: Personal Data (Local Storage) [cite: 2, 10, 11] */
+            /* ---------------------------------------------------- */
+            document.getElementById('personalDataForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                // Check for minimum 3 programming languages selected [cite: 8]
+                const selectedLangs = Array.from(document.querySelectorAll('input[name="lang"]:checked')).map(el => el.value);
+                if (selectedLangs.length < 3) {
+                    alert('You must select at least 3 programming languages.');
+                    return;
+                }
+
+                // Collect data
+                const personalRecord = {
+                    name: document.getElementById('name').value,
+                    age: document.getElementById('age').value,
+                    gender: document.querySelector('input[name="gender"]:checked').value,
+                    description: document.getElementById('description').value,
+                    majorUni: document.getElementById('majorUni').value,
+                    languages: selectedLangs.join(', ')
+                };
+
+                // Read existing data (or empty array)
+                let records = JSON.parse(localStorage.getItem('personalRecords') || '[]');
+                
+                // Add the new record
+                records.push(personalRecord);
+                
+                // Store the updated array in Local Storage [cite: 10]
+                localStorage.setItem('personalRecords', JSON.stringify(records));
+                
+                // Render the new data as a card [cite: 11]
+                renderCard(personalRecord, 'localDataContainer', 'Local');
+                this.reset(); // Clear the form
+            });
+
+            /* ---------------------------------------------------- */
+            /* Task Two: Project Idea (Session Storage) [cite: 12, 17, 18] */
+            /* ---------------------------------------------------- */
+            document.getElementById('projectIdeaForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                // Collect data
+                const projectIdea = {
+                    subject: document.getElementById('subject').value,
+                    description: document.getElementById('projectDesc').value,
+                    userTypes: document.getElementById('userTypes').value,
+                    technology: document.getElementById('technology').value
+                };
+
+                // Read existing data (or empty array)
+                let ideas = JSON.parse(sessionStorage.getItem('projectIdeas') || '[]');
+
+                // Add the new idea
+                ideas.push(projectIdea);
+
+                // Store the updated array in Session Storage [cite: 17]
+                sessionStorage.setItem('projectIdeas', JSON.stringify(ideas));
+
+                // Render the new data as a card [cite: 18]
+                renderCard(projectIdea, 'sessionDataContainer', 'Session');
+                this.reset(); // Clear the form
+            });
+
+
+            /* ---------------------------------------------------- */
+            /* Task Three: Registration / Login (Local Storage) [cite: 19, 20] */
+            /* ---------------------------------------------------- */
+
+            // A. Registration Form
+            document.getElementById('registerForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const messageEl = document.getElementById('registerMessage');
+
+                const newUser = {
+                    firstName: document.getElementById('regFirstName').value,
+                    lastName: document.getElementById('regLastName').value,
+                    email: document.getElementById('regEmail').value,
+                    password: document.getElementById('regPassword').value // Note: Password should be hashed in a real application
+                };
+
+                // Read current users from Local Storage
+                let users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+
+                // Check for duplicate email
+                if (users.some(user => user.email === newUser.email)) {
+                    messageEl.textContent = 'This email is already registered!';
+                    messageEl.style.color = 'red';
+                    return;
+                }
+
+                // Add the new user
+                users.push(newUser);
+                localStorage.setItem('registeredUsers', JSON.stringify(users)); // Store in Local Storage [cite: 20]
+
+                messageEl.textContent = 'Registration successful! You can now log in.';
+                messageEl.style.color = 'green';
+                this.reset();
+            });
+
+            // B. Login Form
+            document.getElementById('loginForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const messageEl = document.getElementById('loginMessage');
+                
+                const loginEmail = document.getElementById('loginEmail').value;
+                const loginPassword = document.getElementById('loginPassword').value;
+
+                // Read users from Local Storage [cite: 20]
+                const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+
+                // Find the user
+                const foundUser = users.find(user => 
+                    user.email === loginEmail && user.password === loginPassword
+                );
+
+                if (foundUser) {
+                    messageEl.textContent = `Welcome, ${foundUser.firstName} ${foundUser.lastName}! Login successful.`;
+                    messageEl.style.color = 'green';
+                } else {
+                    messageEl.textContent = 'Login failed. Check your email or password.';
+                    messageEl.style.color = 'red';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

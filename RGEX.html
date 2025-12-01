@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Registration Form - Validation Example</title>
+  <link rel="stylesheet" href="RGEX.css" />
+  
+</head>
+<body>
+  <h2>Registration Form</h2>
+  <form id="regForm" novalidate>
+    <div class="field">
+      <label for="firstName">First name</label>
+      <input id="firstName" name="firstName" type="text" />
+      <div class="error" id="errFirst"></div>
+    </div>
+
+    <div class="field">
+      <label for="lastName">Last name</label>
+      <input id="lastName" name="lastName" type="text" />
+      <div class="error" id="errLast"></div>
+    </div>
+
+    <div class="field">
+      <label for="birthDate">Birth date</label>
+      <input id="birthDate" name="birthDate" type="date" />
+      <div class="error" id="errBirth"></div>
+    </div>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" />
+      <div class="error" id="errEmail"></div>
+    </div>
+
+    <div class="field">
+      <label for="emailConfirm">Confirm Email</label>
+      <input id="emailConfirm" name="emailConfirm" type="email" />
+      <div class="error" id="errEmailConf"></div>
+    </div>
+
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" />
+      <div class="error" id="errPass"></div>
+    </div>
+
+    <div class="field">
+      <label for="passConfirm">Confirm Password</label>
+      <input id="passConfirm" name="passConfirm" type="password" />
+      <div class="error" id="errPassConf"></div>
+    </div>
+
+    <div class="field">
+      <label for="mobile">Mobile (10 digits)</label>
+      <input id="mobile" name="mobile" type="tel" />
+      <div class="error" id="errMobile"></div>
+    </div>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('regForm');
+
+    // Regex rules
+    const nameRegex = /^[A-Za-z]+$/; // letters only
+    const emailRegex = /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/; // simple email validation
+    // Password regex:
+    // - length 8-32
+    // - first char must be uppercase
+    // - at least two digits anywhere
+    // - at least one special character (common set)
+    const passRegex = /^(?=.{8,32}$)(?=(.*\d){2,})(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Z].*$/;
+    const mobileRegex = /^\d{10}$/;
+
+    // helper to show error
+    function showError(id, msg) {
+      document.getElementById(id).textContent = msg || '';
+    }
+
+    // compute age from birth date, return integer age in years
+    function getAge(birthDateStr) {
+      if (!birthDateStr) return null;
+      const b = new Date(birthDateStr);
+      if (isNaN(b)) return null;
+      const today = new Date();
+      let age = today.getFullYear() - b.getFullYear();
+      const m = today.getMonth() - b.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < b.getDate())) age--;
+      return age;
+    }
+
+    function validateAll() {
+      const first = document.getElementById('firstName').value.trim();
+      const last = document.getElementById('lastName').value.trim();
+      const birth = document.getElementById('birthDate').value;
+      const email = document.getElementById('email').value.trim();
+      const emailConf = document.getElementById('emailConfirm').value.trim();
+      const pass = document.getElementById('password').value;
+      const passConf = document.getElementById('passConfirm').value;
+      const mobile = document.getElementById('mobile').value.trim();
+
+      let ok = true;
+
+      // 1 - name letters only
+      if (!first) {
+        showError('errFirst', 'First name is required.');
+        ok = false;
+      } else if (!nameRegex.test(first)) {
+        showError('errFirst', 'First name must contain letters only (A-Z).');
+        ok = false;
+      } else showError('errFirst', '');
+
+      if (!last) {
+        showError('errLast', 'Last name is required.');
+        ok = false;
+      } else if (!nameRegex.test(last)) {
+        showError('errLast', 'Last name must contain letters only (A-Z).');
+        ok = false;
+      } else showError('errLast', '');
+
+      // 2 - birth date validation
+      if (!birth) {
+        showError('errBirth', 'Birth date is required.');
+        ok = false;
+      } else {
+        const age = getAge(birth);
+        if (age === null) {
+          showError('errBirth', 'Invalid birth date.');
+          ok = false;
+        } else if (age < 0) {
+          showError('errBirth', 'Birth date cannot be in the future.');
+          ok = false;
+        } else if (age > 120) {
+          showError('errBirth', 'Please enter a realistic age (<= 120).');
+          ok = false;
+        } else {
+          showError('errBirth', '');
+        }
+      }
+
+      // 3 - email structure
+      if (!email) {
+        showError('errEmail', 'Email is required.');
+        ok = false;
+      } else if (!emailRegex.test(email)) {
+        showError('errEmail', 'Email format is invalid.');
+        ok = false;
+      } else showError('errEmail', '');
+
+      // 4 - emails match
+      if (!emailConf) {
+        showError('errEmailConf', 'Please confirm your email.');
+        ok = false;
+      } else if (email !== emailConf) {
+        showError('errEmailConf', 'Emails do not match.');
+        ok = false;
+      } else showError('errEmailConf', '');
+
+      // 5 - password rules
+      if (!pass) {
+        showError('errPass', 'Password is required.');
+        ok = false;
+      } else if (!passRegex.test(pass)) {
+        // give helpful message listing requirements
+        showError('errPass',
+          'Password must: start with a capital letter, be 8-32 chars, include at least two digits and at least one special character.');
+        ok = false;
+      } else showError('errPass', '');
+
+      // 5.d - pass confirmation
+      if (!passConf) {
+        showError('errPassConf', 'Please confirm your password.');
+        ok = false;
+      } else if (pass !== passConf) {
+        showError('errPassConf', 'Passwords do not match.');
+        ok = false;
+      } else showError('errPassConf', '');
+
+      // 6 - mobile 10 digits
+      if (!mobile) {
+        showError('errMobile', 'Mobile number is required.');
+        ok = false;
+      } else if (!mobileRegex.test(mobile)) {
+        showError('errMobile', 'Mobile number must be exactly 10 digits (numbers only).');
+        ok = false;
+      } else showError('errMobile', '');
+
+      return ok;
+    }
+
+    // Clear error on input for better UX
+    Array.from(document.querySelectorAll('input')).forEach(input => {
+      input.addEventListener('input', (e) => {
+        const map = {
+          'firstName': 'errFirst',
+          'lastName': 'errLast',
+          'birthDate': 'errBirth',
+          'email': 'errEmail',
+          'emailConfirm': 'errEmailConf',
+          'password': 'errPass',
+          'passConfirm': 'errPassConf',
+          'mobile': 'errMobile'
+        };
+        const id = input.id;
+        if (map[id]) showError(map[id], '');
+        document.getElementById('formMsg').textContent = '';
+      });
+    });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formOk = validateAll();
+      const msgEl = document.getElementById('formMsg');
+      if (formOk) {
+        msgEl.innerHTML = '<span class="success">Registration successful (demo). You can now send the data to your server.</span>';
+        // here you would normally send the data via fetch/ajax
+        // e.g. fetch('/register', { method: 'POST', body: JSON.stringify({...}) })
+      } else {
+        msgEl.innerHTML = '<span class="error">Please fix the highlighted errors.</span>';
+      }
+    });
+  </script>
+</body>
+</html>

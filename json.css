@@ -1,0 +1,44 @@
+ .row {
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            width: fit-content;
+        }
+
+        .name { background-color: #9cff9c; padding: 3px 5px; }
+        .email { background-color: #ffb5b5; padding: 3px 5px; }
+        .mobile { background-color: #ccc; padding: 3px 5px; }
+
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+#header {
+    background: #001a66;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    user-select: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    display: none; /* Hidden at start */
+}
+
+th, td {
+    border: 1px solid #999;
+    padding: 10px;
+    font-size: 18px;
+}
+
+th {
+    background: #eee;
+}
