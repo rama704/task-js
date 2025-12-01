@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="event.css">
+</head>
+<body>
+  <h2 id="heading">Hello World!</h2>
+  <hr>
+  <label for="countries">Choose a country:</label>
+    <select id="countries" name="countries">
+    <option value="jordan">jordan</option>
+    <option value="brazil">Brazil</option>
+    <option value="australia">australia</option>
+    <option value="india">india</option>
+    <option value="england">england</option>
+    </select>
+    <img id="flag" src="" alt="Country flag" style="margin-top:20px;width:200px;display:block;">
+    <hr>
+    <label>Password:</label>
+  <input type="password" id="password">
+  <p id="shortMsg" class="error">Password is too short</p>
+
+  <label>Confirm Password:</label>
+  <input type="password" id="confirmPassword">
+  <p id="matchMsg" class="error">Passwords do not match</p>
+  <input type="submit" value="Submit">
+  <hr>
+<div class="container">
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h2 class="accordion-title">What is lorem ipsum?</h2>
+                <button class="toggle-btn" onclick="toggleContent(0)">Show</button>
+            </div>
+            <div class="accordion-content" id="content-0">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h2 class="accordion-title">Why do we use it?</h2>
+                <button class="toggle-btn" onclick="toggleContent(1)">Show</button>
+            </div>
+            <div class="accordion-content" id="content-1">
+                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h2 class="accordion-title">Where does it come from?</h2>
+                <button class="toggle-btn" onclick="toggleContent(2)">Show</button>
+            </div>
+            <div class="accordion-content" id="content-2">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage.
+            </div>
+        </div>
+    </div>
+    <hr>
+ <div class="wrapper">
+        <div class="controls-bar">
+            <select class="typeface-dropdown" id="typefaceMenu">
+                <option value="Arial">Arial</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Verdana">Verdana</option>
+            </select>
+
+            <input type="number" class="size-input" id="sizeField" value="14" min="8" max="72">
+
+            <button class="format-button slanted" id="slantedToggle" onclick="applyFormat('slanted')">Italic</button>
+            <button class="format-button heavy" id="heavyToggle" onclick="applyFormat('heavy')">Bold</button>
+            <button class="format-button lined" id="linedToggle" onclick="applyFormat('lined')">Underline</button>
+        </div>
+
+        <textarea class="text-area" id="textBox" placeholder="Type your text here...">The quick brown fox jumps over the lazy dog</textarea>
+    </div>
+    <hr>
+
+<!-- الحاوية الرئيسية -->
+    <div class="main-container">
+        <!-- المربع المتحرك -->
+        <div class="animated-square" id="colorBox"></div>
+    </div>
+
+
+  <script>
+  const heading = document.getElementById('heading');
+
+    heading.addEventListener('mouseenter', () => {
+      heading.style.backgroundColor = 'yellow';
+       heading.style.fontWeight='bold';
+
+    });
+    heading.addEventListener('mouseleave', () => {
+    heading.style.backgroundColor = '';
+    heading.style.fontWeight = '';
+  });
+    const countries = document.getElementById('countries');
+  const flagImg = document.getElementById('flag');
+
+  // خريطة كل بلد مع رابط العلم
+  const countryFlags = {
+    jordan: 'https://upload.wikimedia.org/wikipedia/commons/c/c0/Flag_of_Jordan.svg',
+    brazil: 'https://upload.wikimedia.org/wikipedia/en/0/05/Flag_of_Brazil.svg',
+    australia: 'https://upload.wikimedia.org/wikipedia/en/b/b9/Flag_of_Australia.svg',
+    india: 'https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg',
+    england: 'https://upload.wikimedia.org/wikipedia/en/b/be/Flag_of_England.svg'
+  };
+
+  // عند تغيير الاختيار
+  countries.addEventListener('change', () => {
+    const selected = countries.value;
+    if(selected && countryFlags[selected]){
+      flagImg.src = countryFlags[selected];
+      flagImg.alt = selected + ' flag';
+    } else {
+      flagImg.src = '';
+      flagImg.alt = 'Country flag';
+    }
+  });
+      const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmPassword");
+    const shortMsg = document.getElementById("shortMsg");
+    const matchMsg = document.getElementById("matchMsg");
+
+    password.addEventListener("input", () => {
+      if (password.value.length < 6) {
+        shortMsg.style.display = "block";
+      } else {
+        shortMsg.style.display = "none";
+      }
+
+      checkMatch();
+    });
+
+    confirmPassword.addEventListener("input", checkMatch);
+
+    function checkMatch() {
+      if (confirmPassword.value !== "" && password.value !== confirmPassword.value) {
+        matchMsg.style.display = "block";
+      } else {
+
+        matchMsg.style.display = "none";
+      }
+    }
+  const toggles = document.querySelectorAll(".toggle");
+
+    toggles.forEach((toggle, index) => {
+      toggle.addEventListener("click", () => {
+        const content = document.querySelectorAll(".content")[index];
+
+        if (content.style.display === "none" || content.style.display === "") {
+          content.style.display = "block";
+          toggle.textContent = "Hide";
+        } else {
+          content.style.display = "none";
+          toggle.textContent = "Show";
+        }
+      });
+    });
+    function toggleContent(index) {
+            const content = document.getElementById(`content-${index}`);
+            const btn = event.target;
+            
+            if (content.classList.contains('show')) {
+                content.classList.remove('show');
+                btn.textContent = 'Show';
+            } else {
+                content.classList.add('show');
+                btn.textContent = 'Hide';
+            }
+        }
+         const textBox = document.getElementById('textBox');
+        const typefaceMenu = document.getElementById('typefaceMenu');
+        const sizeField = document.getElementById('sizeField');
+        const slantedToggle = document.getElementById('slantedToggle');
+        const heavyToggle = document.getElementById('heavyToggle');
+        const linedToggle = document.getElementById('linedToggle');
+
+        let formatting = {
+            slanted: false,
+            heavy: false,
+            lined: false
+        };
+
+        // Change font family
+        typefaceMenu.addEventListener('change', function() {
+            textBox.style.fontFamily = this.value;
+        });
+
+        // Change font size
+        sizeField.addEventListener('input', function() {
+            textBox.style.fontSize = this.value + 'px';
+        });
+
+        // Toggle text styles
+        function applyFormat(format) {
+            formatting[format] = !formatting[format];
+            
+            if (format === 'slanted') {
+                textBox.style.fontStyle = formatting.slanted ? 'italic' : 'normal';
+                slantedToggle.classList.toggle('selected');
+            } else if (format === 'heavy') {
+                textBox.style.fontWeight = formatting.heavy ? 'bold' : 'normal';
+                heavyToggle.classList.toggle('selected');
+            } else if (format === 'lined') {
+                textBox.style.textDecoration = formatting.lined ? 'underline' : 'none';
+                linedToggle.classList.toggle('selected');
+            }
+        }
+         // الحصول على عنصر المربع
+        const colorBox = document.getElementById('colorBox');
+        
+        // مصفوفة الألوان التي سيتغير إليها المربع
+        const colorsList = ['blue', 'red', 'green', 'purple', 'orange', 'pink'];
+        
+        // متغير لتتبع اللون الحالي
+        let currentColorIndex = 0;
+        
+        // دالة لتغيير اللون
+        function changeBoxColor() {
+            // الانتقال للون التالي
+            currentColorIndex = (currentColorIndex + 1) % colorsList.length;
+            
+            // تطبيق اللون الجديد على المربع
+            colorBox.style.backgroundColor = colorsList[currentColorIndex];
+        }
+        
+        // استخدام setInterval لتغيير اللون كل 3 ثواني (3000 ميلي ثانية)
+        setInterval(changeBoxColor, 3000);
+        
+        // إضافة event listener للنقر على المربع لتغيير اللون فوراً
+        colorBox.addEventListener('click', function(event) {
+            changeBoxColor();
+        });
+        
+        // إضافة event listener عند مرور الماوس فوق المربع
+        colorBox.addEventListener('mouseenter', function(event) {
+            // إضافة حدود عند المرور بالماوس
+            this.style.border = '3px solid black';
+        });
+        
+        // إضافة event listener عند مغادرة الماوس للمربع
+        colorBox.addEventListener('mouseleave', function(event) {
+            // إزالة الحدود عند مغادرة الماوس
+            this.style.border = 'none';
+        });
+    </script>
+</body>
+</html>

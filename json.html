@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="json.css">
+</head>
+<body>
+   <label>Name:</label>
+    <input type="text" id="name"><br><br>
+
+    <label>Email:</label>
+    <input type="text" id="email"><br><br>
+
+    <label>Mobile:</label>
+    <input type="text" id="mobile"><br><br>
+
+    <button onclick="printData()">Click On Me to Print</button>
+
+    <div id="output"></div>
+    <hr>
+    <div id="header">
+    Click to show Table / Double Click to hide Table
+</div>
+
+<table id="dataTable">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+ <script>
+  
+        function printData() {
+
+            // تخزين القيم داخل JSON
+            const person = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                mobile: document.getElementById("mobile").value
+            };
+
+            // عرض المحتوى بنفس ألوان الصورة
+            document.getElementById("output").innerHTML = `
+                <div class="row">
+                    <span class="name">${person.name}</span>
+                    <span class="email">${person.email}</span>
+                    <span class="mobile">${person.mobile}</span>
+                </div>
+            `;
+        }
+        
+    const persons = [
+    { firstname: "Terry", mobile: "+63 791 675 8914", email: "atmy0@sohu.com" },
+    { firstname: "Sheldon", mobile: "+7 313 117 8194", email: "hblingley1@jalbum.net" },
+    { firstname: "Terrill", mobile: "+63 799 292 7942", email: "nhawes2@lsl.la" },
+    { firstname: "Mavis", mobile: "+32 486 145 346", email: "yarmgat3@nature.com" },
+    { firstname: "Alison", mobile: "+351 277 751 191", email: "xkneus4@upenn.edu" },
+    { firstname: "Oleta", mobile: "+62 540 202 7111", email: "glegette6@columbia.edu" },
+    { firstname: "Dewitt", mobile: "+86 936 797 2277", email: "qdiettrich7@one.com" },
+    { firstname: "Demetris", mobile: "+62 542 500 2211", email: "ulloettro8@aol.com" },
+    { firstname: "Elenora", mobile: "+966 154 303 0824", email: "umccrory9@biglobe.ne.jp" },
+    { firstname: "Austina", mobile: "+380 542 721 544", email: "gacheta@liveinternet.ru" },
+    { firstname: "Tracie", mobile: "+1 609 937 3468", email: "ljarvilleb@postbox.com" }
+];
+
+const header = document.getElementById("header");
+const table = document.getElementById("dataTable");
+const tableBody = table.querySelector("tbody");
+
+// -------------------------
+// Load JSON from internal variable
+// -------------------------
+function loadTable() {
+    persons.forEach(person => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${person.firstname}</td>
+            <td>${person.mobile}</td>
+            <td>${person.email}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+// Show table on click
+header.onclick = () => {
+    table.style.display = "table";
+};
+
+// Hide table on double click
+header.ondblclick = () => {
+    table.style.display = "none";
+};
+
+// Load table when page opens
+loadTable();
+
+
+    </script>
+
+</body>
+</html>
