@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercise one</title>
+
+</head>
+
+<body>
+    <h1 id="show-equation">The final result will be printed here!</h1>
+
+    <div id="rr"></div>
+</body>
+
+<script>
+    let opr = prompt("Enter operation");
+    let firstNum = +prompt("Enter the first number");
+    let secNum = +prompt("Enter the second number");
+
+    let result;
+
+    switch (opr) {
+        case '+':
+            result = firstNum + secNum;
+            break;
+
+        case '-':
+            result = firstNum - secNum;
+            break;
+
+        case '*':
+            result = firstNum * secNum;
+            break;
+
+        case '/':
+            result = firstNum / secNum;
+            break;
+        default:
+            alert("Not a valid operation, please try again.");
+    }
+
+    let output;
+    if (result == null)
+        output = "Equation is canceled due to invalid input";
+    else if (firstNum == "" || secNum == "")
+        output = "You should enter 2 numbers!";
+    else
+        output = `the result of ${firstNum} ${opr} ${secNum} = ${result}`;
+
+    console.log(output);
+
+    const outputElement = document.getElementById('show-equation');
+    outputElement.textContent = output;
+
+</script>
+
+</html>

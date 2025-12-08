@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 6</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    pandigital(98765432112345);
+    pandigital(987650432112345);
+
+    function pandigital(num) {
+        let isPandigital = true;
+
+        let numString = String(num);
+        let currentNum = 0;
+        for (let i = 0; i < 10; i++) {
+            if (numString.search(currentNum.toString()) < 0) {
+                isPandigital = false;
+                break;
+            }
+            currentNum++;
+        }
+        if (isPandigital)
+            alert(numString + " is pandigital number");
+
+        else
+            alert(numString + " is not pandigital number");
+    }
+
+
+</script>
+
+</html>

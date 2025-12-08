@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Task</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    let name = "Rama Mohammad Masarweh";
+    let name_trim = "          Rama Mohammad Masarweh      ";
+
+    // trim removes whitespaces around the string
+    document.write("<pre><mark>" + name_trim + "</mark></pre>");
+    document.write("<pre><mark>" + name_trim.trim() + "</mark></pre>");
+
+    // trimStart removes whitespaces from the start 
+    document.write("<pre><mark>" + name_trim.trimStart() + "</mark></pre>");
+
+    // trimEnd removes whitespaces from the end 
+    document.write("<pre><mark>" + name_trim.trimEnd() + "</mark></pre>");
+    document.write("<br>");
+
+    // padStart add characters before string (until reach the limit)
+    document.write(name.padStart(30, "3") + "<br>");
+
+    // padEnd add characters after string (until reach the limit)
+    document.write(name.padEnd(30, "3") + "<br>");
+
+    // charAt will return the character at specific index
+    // while charCodeAt will return the uniCode for that character
+    document.write(name.charAt(3) + "<br>");
+    document.write(name.charCodeAt(3) + "<br>");
+
+    document.write(name.split(" ") + "<br>");
+
+    document.write("name length: " + name.length + "<br>");
+
+    // slice extract part from the string at specific indices 
+    // can be negative to backward extraction
+    document.write(name.slice(0, 5) + "<br>");
+    document.write(name.slice(-9) + "<br>");
+
+    // substring same as slice but negative values are not allowed
+    document.write(name.substring(5, 10) + "<br>");
+
+    // substr same as substring but the second argument indicates
+    // the number of characters will be taken (legacy)
+    document.write(name.substr(10, 2) + "<br>");
+
+    // replace replaces the first match
+    document.write(name.replace("a", "X") + "<br>");
+
+    // replaceAll replaces every single match
+    document.write(name.replaceAll("a", "X") + "<br>");
+
+    document.write(name.toUpperCase() + "<br>");
+    document.write(name.toLowerCase() + "<br>");
+
+    document.write("Hello ".concat(name) + "! <br>");
+
+    // indexOf returns the index of first match
+    // while lastIndexOf returns the index of first match backward
+    document.write(name.indexOf("a") + "<br>");
+    document.write(name.lastIndexOf("a") + "<br>");
+
+    document.write(name.search("aa") + "<br>");
+
+    // match return first match to regex
+    document.write([...name.match(/./)] + "<br>");
+
+    // matchAll returns all matches to regex
+    let nameArr = [..."hello 3 there 5 ".matchAll(/\d/g)];
+    document.write(nameArr + "<br>");
+
+    document.write(name.includes("M.") + "<br>");
+
+    document.write(name.startsWith("Hello") + "<br>");
+    document.write(name.endsWith("eh") + "<br>");
+
+</script>
+
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map Exercises</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    button { margin: 5px 0; }
+    pre { background: #f0f0f0; padding: 10px; }
+  </style>
+</head>
+<body>
+
+<h1>Map Exercises</h1>
+
+<button onclick="testDoubleNumbers()">Test doubleNumbers</button>
+<pre id="output1"></pre>
+
+<button onclick="testStringItUp()">Test stringItUp</button>
+<pre id="output2"></pre>
+
+<button onclick="testCapitalizeNames()">Test capitalizeNames</button>
+<pre id="output3"></pre>
+
+<button onclick="testNamesOnly()">Test namesOnly</button>
+<pre id="output4"></pre>
+
+<button onclick="testMakeStrings()">Test makeStrings</button>
+<pre id="output5"></pre>
+
+<button onclick="testReadyToPutInTheDOM()">Test readyToPutInTheDOM</button>
+<pre id="output6"></pre>
+
+<button onclick="testDoubleValues()">Test doubleValues</button>
+<pre id="output7"></pre>
+
+<button onclick="testValTimesIndex()">Test valTimesIndex</pre>
+<pre id="output8"></pre>
+
+<button onclick="testExtractKey()">Test extractKey</button>
+<pre id="output9"></pre>
+
+<button onclick="testExtractFullName()">Test extractFullName</button>
+<pre id="output10"></pre>
+
+<script>
+  // Exercise 1
+  function doubleNumbers(arr){ return arr.map(num => num * 2); }
+
+  // Exercise 2
+  function stringItUp(arr){ return arr.map(num => num.toString()); }
+
+  // Exercise 3
+  function capitalizeNames(arr){
+    return arr.map(name => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase());
+  }
+
+  // Exercise 4
+  function namesOnly(arr){ return arr.map(person => person.name); }
+
+  // Exercise 5
+  function makeStrings(arr){
+    return arr.map(person => person.age >= 18 
+      ? `${person.name} can go to The Matrix` 
+      : `${person.name} is under age!!`);
+  }
+
+  // Exercise 6
+  function readyToPutInTheDOM(arr){
+    return arr.map(person => `<h1>${person.name}</h1><h2>${person.age}</h2>`);
+  }
+
+  // Exercise 7
+  function doubleValues(arr){ return arr.map(num => num * 2); }
+
+  // Exercise 8
+  function valTimesIndex(arr){ return arr.map((num, index) => num * index); }
+
+  // Exercise 9
+  function extractKey(arr, key){ return arr.map(obj => obj[key]); }
+
+  // Exercise 10
+  function extractFullName(arr){ return arr.map(obj => `${obj.first} ${obj.last}`); }
+
+  // ---------- Test Functions ----------
+  function testDoubleNumbers(){
+    document.getElementById("output1").textContent = JSON.stringify(doubleNumbers([2,5,100]));
+  }
+
+  function testStringItUp(){
+    document.getElementById("output2").textContent = JSON.stringify(stringItUp([2,5,100]));
+  }
+
+  function testCapitalizeNames(){
+    document.getElementById("output3").textContent = JSON.stringify(capitalizeNames(["john", "JACOB", "jinGleHeimer", "schmidt"]));
+  }
+
+  function testNamesOnly(){
+    const people = [
+      { name: "Angelina Jolie", age: 80 },
+      { name: "Eric Jones", age: 2 },
+      { name: "Paris Hilton", age: 5 },
+      { name: "Kayne West", age: 16 },
+      { name: "Bob Ziroll", age: 100 }
+    ];
+    document.getElementById("output4").textContent = JSON.stringify(namesOnly(people));
+  }
+
+  function testMakeStrings(){
+    const people = [
+      { name: "Angelina Jolie", age: 80 },
+      { name: "Eric Jones", age: 2 },
+      { name: "Paris Hilton", age: 5 },
+      { name: "Kayne West", age: 16 },
+      { name: "Bob Ziroll", age: 100 }
+    ];
+    document.getElementById("output5").textContent = JSON.stringify(makeStrings(people));
+  }
+
+  function testReadyToPutInTheDOM(){
+    const people = [
+      { name: "Angelina Jolie", age: 80 },
+      { name: "Eric Jones", age: 2 },
+      { name: "Paris Hilton", age: 5 },
+      { name: "Kayne West", age: 16 },
+      { name: "Bob Ziroll", age: 100 }
+    ];
+    document.getElementById("output6").innerHTML = readyToPutInTheDOM(people).join("<br>");
+  }
+
+  function testDoubleValues(){
+    document.getElementById("output7").textContent = JSON.stringify(doubleValues([1,2,3]));
+  }
+
+  function testValTimesIndex(){
+    document.getElementById("output8").textContent = JSON.stringify(valTimesIndex([1,2,3]));
+  }
+
+  function testExtractKey(){
+    const arr = [{name: 'Elie'}, {name: 'Tim'}, {name: 'Matt'}, {name: 'Colt'}];
+    document.getElementById("output9").textContent = JSON.stringify(extractKey(arr, 'name'));
+  }
+
+  function testExtractFullName(){
+    const arr = [
+      {first: 'Elie', last:"Schoppik"}, 
+      {first: 'Tim', last:"Garcia"}, 
+      {first: 'Matt', last:"Lane"}, 
+      {first: 'Colt', last:"Steele"}
+    ];
+    document.getElementById("output10").textContent = JSON.stringify(extractFullName(arr));
+  }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectangle Volume</title>
+</head>
+
+<body>
+    <h1 id="output"></h1>
+</body>
+
+<script>
+    let length = +prompt("Enter the length of the rectangle");
+    let width = +prompt("Enter the width of the rectangle");
+    let height = +prompt("Enter the height of the rectangle");
+
+    let outputElement = document.getElementById("output");
+    outputElement.textContent = `The volume of the rectangle with length ${length}, width ${width}, and height ${height} is ${length * width * height}`;
+</script>
+
+</html>

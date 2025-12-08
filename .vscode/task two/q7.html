@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 7</title>
+</head>
+
+<body>
+
+    <script>
+        let drink = prompt("Enter your favourite drink").toLowerCase();
+        let price = 0;
+        switch (drink) {
+            case "banana":
+                price = 25;
+                break;
+
+            case "caramel latte":
+                price = 60;
+                break;
+
+            case "cappuccino":
+                price = 33;
+                break;
+
+            case "Vanilla Latte":
+                price = 50;
+                break;
+
+            case "Frappuccino":
+                price = 43;
+                break;
+        }
+        if (price != 0)
+            alert(`The price of a ${drink} drink is ${price} dollars`)
+        else
+            alert(`Sorry, we don't offer ${drink} drink.`);
+
+    </script>
+
+</body>
+
+</html>
